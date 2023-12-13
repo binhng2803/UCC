@@ -22,10 +22,10 @@ class SegDataset(Dataset):
     def __getitem__(self, idx):
         img = Image.open(self.img_dir / self.img_list[idx])
         br_enhancer = ImageEnhance.Brightness(img)
-        br = 1.5
+        br = 0.75
         img = br_enhancer.enhance(br)
         ct_enhancer = ImageEnhance.Contrast(img)
-        ct = 0.7
+        ct = 2
         img = ct_enhancer.enhance(ct)
         img = np.array(img)
         
