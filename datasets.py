@@ -45,17 +45,18 @@ class SegDataModule(pl.LightningDataModule):
             phase=self.phase,
             split="train",
             transform=A.Compose([A.RandomCrop(380, 380),
-                                A.RandomBrightnessContrast(brightness_limit=(-0.2, 0.2), contrast_limit=(-0.2, 0.2), p=0.5),
-                                A.RandomGamma(gamma_limit=(80, 120), p=0.5),
-                                A.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=30, val_shift_limit=20, p=0.5),
-                                A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
+                                A.RandomRotate90(p=0.5),
+                                # A.RandomBrightnessContrast(brightness_limit=(-0.2, 0.2), contrast_limit=(-0.2, 0.2), p=0.5),
+                                # A.RandomGamma(gamma_limit=(80, 120), p=0.5),
+                                # A.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=30, val_shift_limit=20, p=0.5),
+                                A.Normalize(mean=[0.285, 0.656, 0.206], std=[0.229, 0.224, 0.225]), 
                                 ToTensorV2(),]),
         )
         self.valid = SegDataset(
             root_dir=self.root_dir,
             phase=self.phase,
             split="valid",
-            transform=A.Compose([A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
+            transform=A.Compose([A.Normalize(mean=[0.285, 0.656, 0.206], std=[0.229, 0.224, 0.225]), 
                                 ToTensorV2(),]),
         )
 
