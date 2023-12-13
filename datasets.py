@@ -56,7 +56,8 @@ class SegDataModule(pl.LightningDataModule):
             root_dir=self.root_dir,
             phase=self.phase,
             split="valid",
-            transform=A.Compose([A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
+            transform=A.Compose([A.RandomBrightnessContrast(brightness_limit=(0.99, 0.99), contrast_limit=(-0.3, -0.3), p=1.),
+                                A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
                                 ToTensorV2(),]),
         )
 
