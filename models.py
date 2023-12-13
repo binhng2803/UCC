@@ -9,7 +9,7 @@ class SegModel(pl.LightningModule):
     def __init__(self):
         super(SegModel, self).__init__()
         self.learning_rate = 1e-3
-        self.net = torchvision.models.segmentation.fcn_resnet50(num_classes=2)
+        self.net = torchvision.models.segmentation.deeplabv3_resnet50(num_classes=2)
         self.criterion = nn.CrossEntropyLoss()
         self.evaluator = SMAPIoUMetric()
 
