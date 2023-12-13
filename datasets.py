@@ -21,12 +21,12 @@ class SegDataset(Dataset):
 
     def __getitem__(self, idx):
         img = Image.open(self.img_dir / self.img_list[idx])
-        br_enhancer = ImageEnhance.Brightness(img)
-        br = 0.75
-        img = br_enhancer.enhance(br)
-        ct_enhancer = ImageEnhance.Contrast(img)
-        ct = 2
-        img = ct_enhancer.enhance(ct)
+        # br_enhancer = ImageEnhance.Brightness(img)
+        # br = 0.75
+        # img = br_enhancer.enhance(br)
+        # ct_enhancer = ImageEnhance.Contrast(img)
+        # ct = 2
+        # img = ct_enhancer.enhance(ct)
         img = np.array(img)
         
         ann_path = self.ann_dir / f"{Path(self.img_list[idx]).stem}.png"
