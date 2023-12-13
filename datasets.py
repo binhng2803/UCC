@@ -44,23 +44,28 @@ class SegDataModule(pl.LightningDataModule):
             root_dir=self.root_dir,
             phase=self.phase,
             split="train",
-            transform=A.Compose([A.RandomCrop(380, 380), ToTensorV2()]),
+            transform=A.Compose([A.RandomBrightnessContrast(brightness_limit=(-0.2, 0.2), contrast_limit=(-0.2, 0.2), p=0.5),
+                                A.RandomGamma(gamma_limit=(80, 120), p=0.5),
+                                A.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=30, val_shift_limit=20, p=0.5),
+                                A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
+                                ToTensorV2(),]),
         )
         self.valid = SegDataset(
             root_dir=self.root_dir,
             phase=self.phase,
             split="valid",
-            transform=ToTensorV2()
+            transform=A.Compose([A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
+                                ToTensorV2(),]),
         )
 
     def train_dataloader(self):
-        return DataLoader(self.train, batch_size=self.batch_size, shuffle=True)
+        return DataLoader(self.train, batch_size=self.batch_size, shuffle=True, num_workers=1)
 
     def val_dataloader(self):
-        return DataLoader(self.valid, batch_size=1, shuffle=False)
+        return DataLoader(self.valid, batch_size=1, shuffle=False, num_workers=1)
 
     def test_dataloader(self):
-        return DataLoader(self.valid, batch_size=1, shuffle=False)
+        return DataLoader(self.valid, batch_size=1, shuffle=False, num_workers=1)
 
 
 if __name__ == "__main__":
