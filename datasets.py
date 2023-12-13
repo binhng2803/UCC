@@ -58,7 +58,7 @@ class SegDataModule(pl.LightningDataModule):
                                 # A.RandomGamma(gamma_limit=(80, 120), p=0.5),
                                 # A.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=30, val_shift_limit=20, p=0.5),
                                 # A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
-                                A.Resize(height=448, width=448),
+                                A.Resize(height=224, width=224),
                                 ToTensorV2(),]),
         )
         self.valid = SegDataset(
@@ -67,7 +67,7 @@ class SegDataModule(pl.LightningDataModule):
             split="valid",
             transform=A.Compose([#A.RandomBrightnessContrast(brightness_limit=(0.99, 0.99), contrast_limit=(-0.3, -0.3), p=1.),
                                 # A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), 
-                                A.Resize(height=448, width=448),
+                                A.Resize(height=224, width=224),
                                 ToTensorV2(),]),
         )
 
