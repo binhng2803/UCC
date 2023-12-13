@@ -70,13 +70,13 @@ class SegDataModule(pl.LightningDataModule):
         )
 
     def train_dataloader(self):
-        return DataLoader(self.train, batch_size=self.batch_size, shuffle=True, num_workers=1)
+        return DataLoader(self.train, batch_size=self.batch_size, shuffle=True, num_workers=1, drop_last=True)
 
     def val_dataloader(self):
-        return DataLoader(self.valid, batch_size=1, shuffle=False, num_workers=1)
+        return DataLoader(self.valid, batch_size=1, shuffle=False, num_workers=1, drop_last=True)
 
     def test_dataloader(self):
-        return DataLoader(self.valid, batch_size=1, shuffle=False, num_workers=1)
+        return DataLoader(self.valid, batch_size=1, shuffle=False, num_workers=1, drop_last=True)
 
 
 if __name__ == "__main__":
