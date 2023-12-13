@@ -4,7 +4,7 @@ import lightning.pytorch as pl
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageEnhance
 from torch.utils.data import Dataset, DataLoader
 
 
@@ -20,7 +20,15 @@ class SegDataset(Dataset):
         return len(self.img_list)
 
     def __getitem__(self, idx):
-        img = np.array(Image.open(self.img_dir / self.img_list[idx]))
+        img = Image.open(self.img_dir / self.img_list[idx])
+        br_enhancer = ImageEnhance.Brightness(img)
+        br = 1.5
+        img = br_enhancer.enhance(br)
+        ct_enhancer = ImageEnhance.Contrast(img)
+        ct = 0.7
+        img = ct_enhancer.enhance(ct)
+        img = np.array(img)
+        
         ann_path = self.ann_dir / f"{Path(self.img_list[idx]).stem}.png"
         ann = np.array(Image.open(ann_path))
 
