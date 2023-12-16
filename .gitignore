@@ -6,3 +6,4 @@ draft.py
 logs
 /logging/
 /model/
+/.ipynb_checkpoints/
