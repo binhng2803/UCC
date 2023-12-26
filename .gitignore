@@ -1,9 +1,12 @@
 draft.py
 **/.idea/
 **/__pycache__/
-/data/
+/data/public/
+/data/warmup/
 **/logs/
 logs
 /logging/
 /model/
 /.ipynb_checkpoints/
+/data_after_augmentation/
+
