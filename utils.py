@@ -29,7 +29,7 @@ def mask_to_rgb(mask: np.ndarray, label_to_color: dict):
         mask_blue[mask == l] = label_to_color[l][2]
 
     mask_colors = (
-        np.stack([mask_red, mask_green, mask_blue]).astype(np.uint8) #.transpose(1, 2, 0)
+        np.stack([mask_red, mask_green, mask_blue]).astype(np.uint8).transpose(1, 2, 0)
     )
     return mask_colors
 
